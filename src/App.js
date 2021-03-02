@@ -15,7 +15,7 @@ const columnStyles = css`
 
   span {
     display: inline-block;
-    border: solid 1px #00559b;
+    border: solid 1px #58d8ff;
     width: 10px;
     height: 10px;
     padding: 0;
@@ -35,7 +35,7 @@ const live = css`
 `;
 
 function App() {
-  const gameGridCopy = create2DArray(50, 50).map((xArr) => xArr.map(() => 0));
+  const gameGridCopy = create2DArray(20, 20).map((xArr) => xArr.map(() => 0));
 
   const [gameGrid, setGameGrid] = useState(gameGridCopy);
   const [isActive, setIsActive] = useState(false);
@@ -52,7 +52,7 @@ function App() {
       if (isActive) {
         setGameGrid(runTurn(gameGrid));
       }
-    }, 100);
+    }, 0);
     return () => clearInterval(run);
   }, [gameGrid, isActive]);
 

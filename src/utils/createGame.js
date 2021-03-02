@@ -9,15 +9,21 @@ export function runTurn(gridState) {
 
   const newGridState = gridStateCopy.map((gridColumn, xIndex) => {
     const newArrValues = gridColumn.map((cellValue, yIndex) => {
+      const xMin = xIndex === 0 ? gridStateCopy.length : xIndex
+      const xMax = xIndex === gridStateCopy.length -1 ? -1 : xIndex;
+      const yMin = yIndex === 0 ? gridColumn.length : yIndex
+      const yMax = yIndex === gridColumn.length -1 ? -1 : yIndex;
+
+
       const neighborhood = [
-        [xIndex - 1, yIndex - 1],
-        [xIndex - 1, yIndex],
-        [xIndex - 1, yIndex + 1],
-        [xIndex, yIndex - 1],
-        [xIndex, yIndex + 1],
-        [xIndex + 1, yIndex - 1],
-        [xIndex + 1, yIndex],
-        [xIndex + 1, yIndex + 1],
+        [xMin - 1, yMin - 1],
+        [xMin - 1, yIndex],
+        [xMin - 1, yMax + 1],
+        [xIndex, yMin - 1],
+        [xIndex, yMax + 1],
+        [xMax + 1, yMin - 1],
+        [xMax + 1, yIndex],
+        [xMax + 1, yMax + 1],
       ];
 
       const cellCount = neighborhood.reduce((acc, neighbor) => {
@@ -36,6 +42,8 @@ export function runTurn(gridState) {
         return count;
       }, 0);
 
+      // return cellCount
+
       if (cellValue === 1 && (cellCount === 2 || cellCount === 3)) {
         return 1;
       }
@@ -43,12 +51,17 @@ export function runTurn(gridState) {
         return 1;
       }
 
+      
+
       return 0;
+    
     });
 
+    
+  
     return newArrValues;
   });
-
+  // console.table(gridStateCopy)
   return newGridState;
 }
 
