@@ -52,7 +52,7 @@ function App() {
       if (isActive) {
         setGameGrid(runTurn(gameGrid));
       }
-    }, 0);
+    }, 500);
     return () => clearInterval(run);
   }, [gameGrid, isActive]);
 
